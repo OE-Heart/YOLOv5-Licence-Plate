@@ -1,0 +1,1 @@
+python detect_plate.py --weights runs/train/exp6/weights/best.pt --image data/images/image.jpg
