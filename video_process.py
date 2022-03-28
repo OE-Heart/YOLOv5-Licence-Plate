@@ -5,7 +5,7 @@ from model import YOLOv5_plate
 
 plate_det = YOLOv5_plate()
 
-fcap = cv2.VideoCapture('video/demo.avi')
+fcap = cv2.VideoCapture('video/face.mp4')
 
 def add_mosaic(img, points, step):
     for point in points:
@@ -43,18 +43,17 @@ while fcap.isOpened():
         success, frame = fcap.read()
 
         _, points_plate = plate_det.infer(frame)
-        # frame = add_mosaic(frame, points_plate, 9)
+        frame = add_mosaic(frame, points_plate, 6)
 
         cv2.imwrite('video/pic/result' + str(cnt) + '.jpg', frame)
         # 保存帧数据
         writer.write(frame)
 
         cnt += 1
-        if (cnt % 100 == 0):
+        if (cnt % 1000 == 0):
             print(cnt, "done")
-    
-end = time.time()
-print('time cost', end - start,'s')
+            end = time.time()
+            print('time cost', end - start,'s')
     
 # 释放VideoCapture资源
 fcap.release()

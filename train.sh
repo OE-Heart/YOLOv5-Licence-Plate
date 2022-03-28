@@ -1,13 +1,12 @@
-export CUDA_VISIBLE_DEVICES=6,7
+export CUDA_VISIBLE_DEVICES=2,3,4,5
 
 python train.py \
 --img 640 \
 --batch 16 \
---epochs 3 \
+--epochs 15 \
 --data data/ccpd.yaml \
 --cfg models/yolov5s.yaml \
 --weights weights/yolov5s.pt \
---hyp data/hyps/hyp.scratch-low.yaml \
---optimizer AdamW \
+--hyp data/hyps/hyp.test.yaml \
+--optimizer SGD \
 --save-period 1
---evolve 1

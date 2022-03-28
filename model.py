@@ -34,10 +34,10 @@ def show_results(img, xywh, conf):
 class YOLOv5_plate(object):
     # 参数设置
     _defaults = {
-        "weights": "runs/train/exp4/weights/best.pt",
+        "weights": "runs/train/exp6/weights/best.pt",
         "imgsz": 640,
         "iou_thres":0.45,
-        "conf_thres":0.24,
+        "conf_thres":0.3,
         "classes":1 
     }
 
@@ -105,7 +105,7 @@ class YOLOv5_plate(object):
                 for j in range(det.size()[0]):
                     xywh = (xyxy2xywh(det[j, :4].view(1, 4)) / gn).view(-1).tolist()
                     conf = det[j, 4].cpu().numpy() # 检测框文字
-                    inImg = show_results(inImg, xywh, conf)
+                    # inImg = show_results(inImg, xywh, conf)
                     
                     x1 = int(xywh[0] * w - 0.5 * xywh[2] * w)
                     y1 = int(xywh[1] * h - 0.5 * xywh[3] * h)
@@ -117,8 +117,9 @@ class YOLOv5_plate(object):
                     category.append(1)
                     points.append(point)
             else:
-                print("None")
+                pass
+                # print("None")
 
-        cv2.imwrite('result.jpg', inImg)
+        # cv2.imwrite('result.jpg', inImg)
 
         return category, points
